@@ -1,0 +1,1189 @@
+cat > /mnt/user-data/outputs/typography-task02.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typography Task 02 — Brand Identity · Riddhi | CodeAlpha</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,100;1,9..144,300;1,9..144,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #080808;
+  --chalk: #f0ede6;
+  --warm: #e8e0d0;
+  --ember: #e05c1a;
+  --ember-dim: #7a2e08;
+  --sage: #4a5e4a;
+  --sand: #c8b89a;
+  --dim: #2a2a2a;
+  --mid: #555;
+  --faint: rgba(240,237,230,0.08);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--void);
+  color:var(--chalk);
+  font-family:'Space Mono',monospace;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* grain */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='0.055'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;
+}
+
+/* cursor */
+.cur{width:8px;height:8px;background:var(--ember);border-radius:50%;position:fixed;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+.cur-o{width:32px;height:32px;border:1px solid var(--ember);border-radius:50%;position:fixed;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);opacity:.4;transition:left .14s ease,top .14s ease,width .2s,height .2s;}
+
+/* progress */
+.prog{position:fixed;top:0;left:0;height:1px;background:var(--ember);width:0;z-index:9997;transition:width .08s;}
+
+/* ── TOP BAR ── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.9rem 2.5rem;
+  border-bottom:1px solid rgba(240,237,230,.08);
+  background:rgba(8,8,8,.85);
+  backdrop-filter:blur(12px);
+  z-index:8000;
+  animation:fadeD .8s 1.2s both;
+}
+.topbar-brand{
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:.95rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.topbar-brand span{color:var(--ember);}
+.topbar-meta{
+  font-family:'Space Mono',monospace;
+  font-size:.55rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--sand);
+  opacity:.6;
+  text-align:right;
+  line-height:1.8;
+}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-rows:1fr auto;
+  padding:7rem 2.5rem 3rem;
+  position:relative;
+  overflow:hidden;
+  border-bottom:1px solid rgba(240,237,230,.1);
+}
+
+.hero-bg-text{
+  position:absolute;
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:clamp(8rem,18vw,18rem);
+  line-height:1;
+  color:rgba(240,237,230,.025);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  white-space:nowrap;
+  pointer-events:none;
+  user-select:none;
+  letter-spacing:-.02em;
+}
+
+.hero-content{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:end;
+  z-index:1;
+}
+
+.hero-left{
+    display: flex;
+    flex-direction: colour;
+}
+.task-label{
+  font-family:'Space Mono',monospace;
+  font-size:.55rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--ember);
+  margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.8rem;
+  animation:slideR .8s .2s cubic-bezier(.16,1,.3,1) both;
+}
+.task-label::before{content:'';width:24px;height:1px;background:var(--ember);}
+
+.hero-h1{
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:clamp(3.5rem,8vw,7.5rem);
+  line-height:.9;
+  letter-spacing:-.03em;
+  animation:slideU .9s .3s cubic-bezier(.16,1,.3,1) both;
+}
+.hero-h1 .stroke{
+  -webkit-text-stroke:1px var(--chalk);
+  color:transparent;
+  display:block;
+}
+.hero-h1 .filled{display:block;}
+.hero-h1 .ember{color:var(--ember);display:block;}
+
+.hero-right{
+  display:flex;flex-direction:column;gap:2rem;
+  animation:fadeD .8s .6s both;
+}
+
+.hero-intro{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1rem,1.8vw,1.3rem);
+  font-weight:300;
+  font-style:italic;
+  line-height:1.7;
+  color:var(--sand);
+  max-width:38ch;
+}
+
+.hero-chips{
+  display:flex;flex-wrap:wrap;gap:.5rem;
+}
+.chip{
+  font-family:'Space Mono',monospace;
+  font-size:.55rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:.35rem .7rem;
+  border:1px solid rgba(240,237,230,.15);
+  color:var(--sand);
+  transition:border-color .2s,color .2s;
+}
+.chip:hover{border-color:var(--ember);color:var(--ember);}
+
+.hero-bottom{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  border-top:1px solid rgba(240,237,230,.08);
+  padding-top:1.5rem;
+  z-index:1;
+}
+.hero-scroll{
+  font-family:'Space Mono',monospace;
+  font-size:.55rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--mid);
+  animation:fadeD 1s 1s both;
+}
+.hero-intern{
+  text-align:right;
+  animation:fadeD 1s 1s both;
+}
+.hero-intern .name{
+  font-family:'Fraunces',serif;
+  font-size:1.2rem;
+  font-style:italic;
+  font-weight:300;
+  color:var(--chalk);
+}
+.hero-intern .org{
+  font-family:'Syne',sans-serif;
+  font-weight:700;
+  font-size:.6rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--ember);
+  margin-top:2px;
+}
+
+/* ── SECTION BASE ── */
+.sec{
+  border-bottom:1px solid rgba(240,237,230,.08);
+  opacity:0;transform:translateY(28px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.sec.vis{opacity:1;transform:none;}
+
+.sec-head{
+  display:flex;align-items:baseline;gap:1.2rem;
+  padding:1.3rem 2.5rem;
+  border-bottom:1px solid rgba(240,237,230,.06);
+  flex-wrap:wrap;
+}
+.sec-num{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--ember);letter-spacing:.1em;}
+.sec-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.04em;}
+.sec-sub{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-left:auto;}
+
+/* ── BRAND SHOWCASE ── */
+.brand-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+}
+
+.brand-card{
+  padding:3rem 2.5rem;
+  border-right:1px solid rgba(240,237,230,.07);
+  position:relative;overflow:hidden;
+  transition:background .3s;
+  min-height:380px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.brand-card:last-child{border-right:none;}
+.brand-card:hover{background:var(--faint);}
+
+/* card underline sweep */
+.brand-card::after{
+  content:'';position:absolute;bottom:0;left:0;
+  height:2px;width:0;background:var(--ember);
+  transition:width .45s ease;
+}
+.brand-card:hover::after{width:100%;}
+
+.bc-tag{
+  font-family:'Space Mono',monospace;
+  font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ember);margin-bottom:1.5rem;display:block;
+}
+
+.bc-logo{margin-bottom:1.5rem;line-height:1;}
+
+.bc-desc{
+  font-family:'Fraunces',serif;
+  font-size:.88rem;line-height:1.72;
+  color:var(--sand);font-weight:300;
+  margin-bottom:1rem;
+}
+
+.bc-spec{
+  font-family:'Space Mono',monospace;
+  font-size:.5rem;letter-spacing:.1em;
+  color:var(--mid);line-height:1.8;
+  border-top:1px solid rgba(240,237,230,.08);
+  padding-top:.8rem;
+  margin-top:auto;
+}
+
+/* Brand 1 — Luxury */
+.b1-logo{
+  font-family:'Fraunces',serif;
+  font-size:2.6rem;font-weight:100;
+  font-style:italic;letter-spacing:.12em;
+  color:var(--chalk);
+}
+.b1-logo span{
+  display:block;
+  font-family:'Space Mono',monospace;
+  font-size:.55rem;letter-spacing:.35em;
+  font-style:normal;font-weight:400;
+  color:var(--sand);margin-top:.5rem;
+  text-transform:uppercase;
+}
+
+/* Brand 2 — Tech */
+.b2-logo{
+  font-family:'Syne',sans-serif;
+  font-weight:800;font-size:2.8rem;
+  letter-spacing:-.04em;
+  display:flex;align-items:flex-start;gap:3px;
+}
+.b2-logo .dot{
+  width:10px;height:10px;
+  background:var(--ember);
+  border-radius:50%;
+  margin-top:.4rem;flex-shrink:0;
+}
+
+/* Brand 3 — Editorial */
+.b3-logo{
+  display:flex;flex-direction:column;gap:2px;
+}
+.b3-top{
+  font-family:'Syne',sans-serif;
+  font-weight:400;font-size:1rem;
+  letter-spacing:.45em;text-transform:uppercase;
+  color:var(--sand);
+}
+.b3-mid{
+  font-family:'Fraunces',serif;
+  font-size:3.2rem;font-weight:700;
+  line-height:.9;letter-spacing:-.02em;
+  color:var(--chalk);
+}
+.b3-bot{
+  width:100%;height:2px;background:var(--ember);margin-top:.3rem;
+}
+
+/* ── TYPE SYSTEM SECTION ── */
+.type-system{
+  display:grid;grid-template-columns:1fr 1fr;
+}
+
+.ts-left{
+  padding:3rem 2.5rem;
+  border-right:1px solid rgba(240,237,230,.07);
+}
+
+.ts-right{padding:3rem 2.5rem;}
+
+.ts-title{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ember);margin-bottom:2rem;
+}
+
+.ts-scale{display:flex;flex-direction:column;gap:1.2rem;}
+
+.ts-row{
+  display:grid;grid-template-columns:80px 1fr;
+  gap:1rem;align-items:baseline;
+}
+
+.ts-label{
+  font-family:'Space Mono',monospace;
+  font-size:.5rem;letter-spacing:.1em;
+  color:var(--mid);text-transform:uppercase;
+  padding-top:.3rem;
+}
+
+.ts-swatch{line-height:1.1;}
+
+/* palette */
+.palette{display:flex;flex-direction:column;gap:1rem;margin-top:0;}
+
+.pal-row{display:flex;align-items:center;gap:1rem;}
+
+.pal-swatch{
+  width:48px;height:48px;
+  border:1px solid rgba(240,237,230,.1);
+  flex-shrink:0;
+}
+
+.pal-info{
+    display: flex;
+    flex-direction: colour;
+    gap: 4px
+}
+.pal-name{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:.75rem;display:block;margin-bottom:2px;
+}
+.pal-use{
+  font-family:'Space Mono',monospace;
+  font-size:.5rem;letter-spacing:.08em;color:var(--mid);
+  line-height:1.6;
+}
+
+/* ── FONT PAIRING DEEP DIVE ── */
+.pairing-deep{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+}
+
+.pd-card{
+  padding:3rem 2.5rem;
+  border-right:1px solid rgba(240,237,230,.07);
+  transition:background .3s;
+}
+.pd-card:last-child{border-right:none;}
+.pd-card:hover{background:var(--faint);}
+
+.pd-tag{
+  font-family:'Space Mono',monospace;
+  font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ember);margin-bottom:1.2rem;display:block;
+}
+
+.pd-demo{margin-bottom:1.2rem;}
+
+.pd-rule{
+  font-family:'Fraunces',serif;
+  font-size:.88rem;line-height:1.7;font-weight:300;
+  color:var(--sand);margin-bottom:.8rem;
+}
+
+.pd-spec{
+  font-family:'Space Mono',monospace;
+  font-size:.5rem;letter-spacing:.08em;
+  color:var(--mid);line-height:1.7;
+}
+
+/* ── HIERARCHY LIVE ── */
+.hier-wrap{
+  display:grid;grid-template-columns:3fr 2fr;
+}
+
+.hier-article{
+  padding:3.5rem 3rem;
+  border-right:1px solid rgba(240,237,230,.07);
+}
+
+/* article styles */
+.art-eyebrow{
+  font-family:'Space Mono',monospace;
+  font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ember);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.7rem;
+}
+.art-eyebrow::before{content:'';width:20px;height:1px;background:var(--ember);}
+
+.art-h1{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(2rem,4vw,3.5rem);
+  line-height:.95;letter-spacing:-.03em;
+  margin-bottom:.8rem;
+}
+
+.art-h2{
+  font-family:'Fraunces',serif;font-weight:300;
+  font-size:clamp(.95rem,1.5vw,1.2rem);
+  font-style:italic;line-height:1.5;
+  color:var(--sand);margin-bottom:1.8rem;
+}
+
+.art-divider{
+  width:40px;height:1px;background:var(--ember);
+  margin-bottom:1.8rem;
+}
+
+.art-body{
+  font-family:'Fraunces',serif;font-weight:300;
+  font-size:.95rem;line-height:1.82;
+  color:rgba(240,237,230,.7);margin-bottom:1rem;
+  max-width:52ch;
+}
+
+.art-caption{
+  font-family:'Space Mono',monospace;
+  font-size:.55rem;letter-spacing:.08em;
+  color:var(--mid);border-top:1px solid rgba(240,237,230,.07);
+  padding-top:.8rem;margin-top:.5rem;line-height:1.7;
+}
+
+/* hierarchy legend */
+.hier-legend{padding:3.5rem 2.5rem;}
+
+.hl-item{
+  margin-bottom:1.6rem;padding-bottom:1.6rem;
+  border-bottom:1px solid rgba(240,237,230,.06);
+  display:grid;grid-template-columns:auto 1fr;gap:.8rem;
+  align-items:start;
+}
+.hl-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+
+.hl-dot{width:8px;height:8px;border-radius:50%;margin-top:.3rem;flex-shrink:0;}
+
+.hl-role{
+  font-family:'Space Mono',monospace;font-size:.52rem;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:3px;
+}
+.hl-desc{
+  font-family:'Fraunces',serif;font-size:.88rem;
+  line-height:1.6;font-weight:300;color:var(--sand);
+}
+
+/* ── SPACING SECTION ── */
+.spacing-cols{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(240,237,230,.06);
+}
+.sp-cell{
+  padding:2.5rem 2rem;
+  border-right:1px solid rgba(240,237,230,.06);
+}
+.sp-cell:last-child{border-right:none;}
+
+.sp-tag{
+  font-family:'Space Mono',monospace;font-size:.52rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ember);margin-bottom:1rem;display:block;
+}
+
+.sp-demo{margin-bottom:.8rem;}
+.sp-note{font-family:'Space Mono',monospace;font-size:.55rem;line-height:1.7;color:var(--mid);}
+
+/* ── PSYCHOLOGY ── */
+.psych-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+
+.psy-card{
+  padding:3rem 2rem;
+  border-right:1px solid rgba(240,237,230,.07);
+  transition:background .3s;
+  position:relative;overflow:hidden;
+}
+.psy-card:last-child{border-right:none;}
+.psy-card:hover{background:var(--faint);}
+
+.psy-tag{
+  font-family:'Space Mono',monospace;font-size:.5rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ember);margin-bottom:.8rem;display:block;
+}
+.psy-word{margin-bottom:.8rem;line-height:1;}
+.psy-desc{
+  font-family:'Fraunces',serif;font-size:.88rem;
+  line-height:1.7;font-weight:300;color:var(--sand);
+}
+.psy-eg{
+  margin-top:.8rem;
+  font-family:'Space Mono',monospace;font-size:.5rem;
+  letter-spacing:.08em;color:var(--mid);text-transform:uppercase;
+}
+
+/* ── POSTER CANVAS ── */
+.poster-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  min-height:55vh;
+}
+
+.post{
+  padding:3rem 2.5rem;display:flex;flex-direction:column;
+  justify-content:space-between;min-height:380px;
+  border-right:1px solid rgba(240,237,230,.07);
+  position:relative;overflow:hidden;
+}
+.post:last-child{border-right:none;}
+
+/* poster 1 — grid lines */
+.p1{background:var(--void);}
+.p1-hline{position:absolute;left:0;right:0;height:1px;background:rgba(240,237,230,.06);}
+.p1-vline{position:absolute;top:0;bottom:0;width:1px;background:rgba(240,237,230,.06);}
+
+/* poster 2 — ember fill */
+.p2{background:var(--ember);}
+.p2 *{color:var(--void) !important;}
+
+/* poster 3 — sage */
+.p3{background:#1a1f1a;}
+
+.post-kicker{
+  font-family:'Space Mono',monospace;font-size:.52rem;
+  letter-spacing:.25em;text-transform:uppercase;
+  opacity:.55;z-index:1;
+}
+.post-main{z-index:1;}
+.post-foot{z-index:1;display:flex;justify-content:space-between;align-items:flex-end;}
+
+/* ── OUTCOMES ── */
+.outcomes-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  border-top:1px solid rgba(240,237,230,.06);
+}
+
+.oc-cell{
+  padding:2.5rem 2rem;
+  border-right:1px solid rgba(240,237,230,.07);
+  transition:background .3s;
+}
+.oc-cell:last-child{border-right:none;}
+.oc-cell:hover{background:var(--faint);}
+
+.oc-num{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:2.5rem;color:rgba(240,237,230,.08);line-height:1;margin-bottom:.5rem;
+}
+.oc-title{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:.8rem;letter-spacing:.04em;margin-bottom:.5rem;
+}
+.oc-desc{
+  font-family:'Space Mono',monospace;font-size:.55rem;
+  line-height:1.75;color:var(--mid);
+}
+
+/* ── FOOTER ── */
+.footer{
+  padding:2rem 2.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid rgba(240,237,230,.1);
+  flex-wrap:wrap;gap:1rem;
+}
+.ft-left{
+    display: flex;
+    flex-direction: colour;
+}
+.ft-name{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:1.3rem;letter-spacing:-.01em;
+}
+.ft-role{
+  font-family:'Space Mono',monospace;font-size:.52rem;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--mid);
+  margin-top:3px;
+}
+.ft-org{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:2rem;letter-spacing:.06em;
+  color:var(--ember);
+}
+.ft-task{
+  font-family:'Space Mono',monospace;font-size:.52rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--mid);
+  text-align:right;line-height:2;
+}
+
+/* ── TOOLS BAR ── */
+.tools-bar{
+  padding:1.8rem 2.5rem;
+  display:flex;gap:2rem;align-items:center;flex-wrap:wrap;
+  border-top:1px solid rgba(240,237,230,.08);
+  background:#0e0e0e;
+}
+.tl-label{
+  font-family:'Space Mono',monospace;font-size:.52rem;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--mid);white-space:nowrap;
+}
+.tl-tag{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:1.1rem;letter-spacing:.06em;
+  padding:.22rem .6rem;
+  border:1px solid rgba(240,237,230,.12);
+  transition:border-color .2s,color .2s;cursor:default;
+}
+.tl-tag:hover{border-color:var(--ember);color:var(--ember);}
+
+/* ── KEYFRAMES ── */
+@keyframes slideU{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:none}}
+@keyframes slideR{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
+@keyframes fadeD{from{opacity:0}to{opacity:1}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1000px){
+  body{cursor:auto;}
+  .cur,.cur-o{display:none;}
+  .hero-content{grid-template-columns:1fr;}
+  .brand-grid,.pairing-deep,.psych-row,.poster-row,.outcomes-grid{grid-template-columns:1fr;}
+  .brand-card,.pd-card,.psy-card,.post,.oc-cell{border-right:none;border-bottom:1px solid rgba(240,237,230,.07);}
+  .type-system,.hier-wrap{grid-template-columns:1fr;}
+  .ts-left,.hier-article{border-right:none;border-bottom:1px solid rgba(240,237,230,.07);}
+  .spacing-cols{grid-template-columns:1fr 1fr;}
+  .sp-cell{border-bottom:1px solid rgba(240,237,230,.06);}
+  .topbar{padding:.8rem 1.2rem;}
+  .hero{padding:6rem 1.5rem 2.5rem;}
+  .sec-head,.hier-article,.hier-legend,.ts-left,.ts-right,
+  .brand-card,.pd-card,.psy-card,.post,.oc-cell{padding:2rem 1.5rem;}
+  .sp-cell{padding:1.8rem 1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-o" id="curo"></div>
+<div class="prog" id="prog"></div>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="topbar-brand">Code<span>Alpha</span> — Typography</div>
+  <div class="topbar-meta">
+    Task 02 · Brand Identity<br>
+    Riddhi · Graphic Design Intern
+  </div>
+</header>
+
+<!-- ════ HERO ════ -->
+<section class="hero" id="s0" style="opacity:1;transform:none;">
+  <div class="hero-bg-text">BRAND</div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="task-label">Task 02 · Brand Identity Typography</div>
+      <h1 class="hero-h1">
+        <span class="stroke">BRAND</span>
+        <span class="filled">IDEN</span>
+        <span class="ember">TITY.</span>
+      </h1>
+    </div>
+    <div class="hero-right">
+      <p class="hero-intro">How type becomes the soul of a brand — the choices of form, weight, and spacing that make a company instantly recognizable before a single word is read.</p>
+      <div class="hero-chips">
+        <span class="chip">Font Pairing</span>
+        <span class="chip">Hierarchy</span>
+        <span class="chip">Spacing</span>
+        <span class="chip">Alignment</span>
+        <span class="chip">Psychology</span>
+        <span class="chip">Brand Systems</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <span class="hero-scroll">↓ Scroll to explore</span>
+    <div class="hero-intern">
+      <div class="name">Riddhi</div>
+      <div class="org">CodeAlpha Internship · 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 01 · BRAND TYPOGRAPHY SHOWCASE ════ -->
+<section class="sec" id="s1">
+  <div class="sec-head">
+    <span class="sec-num">01 —</span>
+    <span class="sec-title">Brand Typography Systems</span>
+    <span class="sec-sub">Three distinct brand voices through type alone</span>
+  </div>
+  <div class="brand-grid">
+
+    <!-- Luxury -->
+    <div class="brand-card">
+      <span class="bc-tag">Brand A · Luxury Fashion</span>
+      <div class="bc-logo">
+        <div class="b1-logo">
+          Maison<br>Léone
+          <span>Paris · Est. MMXII</span>
+        </div>
+      </div>
+      <p class="bc-desc">Thin italic serifs communicate exclusivity and refinement. The wide tracking of the tagline signals calm authority. Nothing feels rushed — every letterform breathes.</p>
+      <div class="bc-spec">
+        Display: Fraunces Italic 100<br>
+        Tagline: Space Mono 400 — tracking .35em<br>
+        Tone: Luxury · Heritage · Exclusivity
+      </div>
+    </div>
+
+    <!-- Tech -->
+    <div class="brand-card">
+      <span class="bc-tag">Brand B · Tech Startup</span>
+      <div class="bc-logo">
+        <div class="b2-logo">
+          <div class="dot"></div>
+          NEXR
+        </div>
+        <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.2em;color:var(--mid);margin-top:.5rem;text-transform:uppercase;">Intelligence Infrastructure</div>
+      </div>
+      <p class="bc-desc">Heavy geometric sans with a tight negative kern screams confidence and forward motion. The ember dot punctuates the name — a visual signature that brands without saying a word.</p>
+      <div class="bc-spec">
+        Display: Syne 800 — tracking −.04em<br>
+        Descriptor: Space Mono 400 — tracking .2em<br>
+        Tone: Bold · Modern · Disruptive
+      </div>
+    </div>
+
+    <!-- Editorial -->
+    <div class="brand-card">
+      <span class="bc-tag">Brand C · Editorial Magazine</span>
+      <div class="bc-logo">
+        <div class="b3-logo">
+          <span class="b3-top">The</span>
+          <span class="b3-mid">MERIDIAN</span>
+          <div class="b3-bot"></div>
+        </div>
+      </div>
+      <p class="bc-desc">Mixing wide-tracked caps with a heavy serif wordmark creates editorial authority. The rule (line) grounds the logo — a structural element borrowed from print newspaper tradition.</p>
+      <div class="bc-spec">
+        Overline: Syne 400 — tracking .45em<br>
+        Wordmark: Fraunces 700<br>
+        Tone: Authoritative · Journalistic · Trusted
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ 02 · TYPE SYSTEM ════ -->
+<section class="sec" id="s2">
+  <div class="sec-head">
+    <span class="sec-num">02 —</span>
+    <span class="sec-title">Type Scale &amp; Colour System</span>
+    <span class="sec-sub">The grid behind the brand</span>
+  </div>
+  <div class="type-system">
+    <div class="ts-left">
+      <div class="ts-title">Typographic Scale</div>
+      <div class="ts-scale">
+        <div class="ts-row">
+          <span class="ts-label">Display</span>
+          <div class="ts-swatch" style="font-family:'Syne',sans-serif;font-weight:800;font-size:3rem;letter-spacing:-.03em;line-height:1;">Brand</div>
+        </div>
+        <div class="ts-row">
+          <span class="ts-label">Heading</span>
+          <div class="ts-swatch" style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.8rem;line-height:1.1;">Section Title</div>
+        </div>
+        <div class="ts-row">
+          <span class="ts-label">Subhead</span>
+          <div class="ts-swatch" style="font-family:'Fraunces',serif;font-size:1.15rem;font-style:italic;font-weight:300;color:var(--sand);">Supporting context line</div>
+        </div>
+        <div class="ts-row">
+          <span class="ts-label">Body</span>
+          <div class="ts-swatch" style="font-family:'Fraunces',serif;font-size:.9rem;font-weight:300;line-height:1.8;color:rgba(240,237,230,.65);">Long-form body text for reading at comfortable measure. Optimised for legibility.</div>
+        </div>
+        <div class="ts-row">
+          <span class="ts-label">Caption</span>
+          <div class="ts-swatch" style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.1em;color:var(--mid);text-transform:uppercase;">LABEL / CAPTION / METADATA</div>
+        </div>
+      </div>
+    </div>
+    <div class="ts-right">
+      <div class="ts-title">Brand Colour &amp; Type Emotion</div>
+      <div class="palette">
+        <div class="pal-row">
+          <div class="pal-swatch" style="background:var(--chalk);"></div>
+          <div class="pal-info">
+            <span class="pal-name" style="color:var(--chalk);">Chalk #F0EDE6</span>
+            <span class="pal-use">Primary text. Warm white feels human — not cold.<br>Use for headlines and body on dark grounds.</span>
+          </div>
+        </div>
+        <div class="pal-row">
+          <div class="pal-swatch" style="background:var(--ember);"></div>
+          <div class="pal-info">
+            <span class="pal-name" style="color:var(--ember);">Ember #E05C1A</span>
+            <span class="pal-use">Accent & energy. Used for labels, highlights,<br>and key brand moments. Use sparingly.</span>
+          </div>
+        </div>
+        <div class="pal-row">
+          <div class="pal-swatch" style="background:var(--sand);"></div>
+          <div class="pal-info">
+            <span class="pal-name" style="color:var(--sand);">Sand #C8B89A</span>
+            <span class="pal-use">Secondary text. Subheads, descriptions, body<br>copy that supports but doesn't demand.</span>
+          </div>
+        </div>
+        <div class="pal-row">
+          <div class="pal-swatch" style="background:var(--void);border:1px solid rgba(240,237,230,.1);"></div>
+          <div class="pal-info">
+            <span class="pal-name" style="color:var(--mid);">Void #080808</span>
+            <span class="pal-use">Background. Near-black (not pure) feels<br>richer, warmer, and more cinematic.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 03 · FONT PAIRING ════ -->
+<section class="sec" id="s3">
+  <div class="sec-head">
+    <span class="sec-num">03 —</span>
+    <span class="sec-title">Font Pairing in Brand Context</span>
+    <span class="sec-sub">Contrast creates character</span>
+  </div>
+  <div class="pairing-deep">
+
+    <div class="pd-card">
+      <span class="pd-tag">Pair A · Sans + Serif</span>
+      <div class="pd-demo">
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;line-height:1;letter-spacing:-.02em;">The Future</div>
+        <div style="font-family:'Fraunces',serif;font-size:1rem;font-style:italic;font-weight:300;color:var(--sand);margin-top:.3rem;">is written in careful detail.</div>
+      </div>
+      <p class="pd-rule">The geometric authority of Syne 800 against Fraunces italic 300 creates maximum contrast — bold confidence met by quiet refinement. Neither overpowers the other.</p>
+      <div class="pd-spec">Syne 800 / Fraunces Italic 300<br>Best for: Brand headlines + editorial body</div>
+    </div>
+
+    <div class="pd-card">
+      <span class="pd-tag">Pair B · Display + Mono</span>
+      <div class="pd-demo">
+        <div style="font-family:'Fraunces',serif;font-weight:700;font-size:2.2rem;line-height:1;letter-spacing:-.01em;">MERIDIAN</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.25em;color:var(--mid);margin-top:.5rem;text-transform:uppercase;">Vol. 12 · Spring 2026</div>
+      </div>
+      <p class="pd-rule">A heavy editorial serif wordmark with monospaced metadata creates the feeling of a prestigious printed publication. The visual gap between organic serif and mechanical mono is the tension that makes it memorable.</p>
+      <div class="pd-spec">Fraunces 700 / Space Mono 400<br>Best for: Publication brands + identities</div>
+    </div>
+
+    <div class="pd-card">
+      <span class="pd-tag">Pair C · Weight Pairing</span>
+      <div class="pd-demo">
+        <div style="font-family:'Syne',sans-serif;font-weight:400;font-size:1.1rem;letter-spacing:.06em;color:var(--sand);text-transform:uppercase;">A studio for</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:2.5rem;line-height:.9;letter-spacing:-.02em;">BOLD<br>IDEAS.</div>
+      </div>
+      <p class="pd-rule">Single typeface, extreme weight contrast. Using one family at 400 and 800 creates a brand system that feels cohesive yet dynamic. The consistency builds trust; the contrast builds impact.</p>
+      <div class="pd-spec">Syne 400 + Syne 800<br>Best for: Brand identity systems, signage</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ 04 · HIERARCHY ════ -->
+<section class="sec" id="s4">
+  <div class="sec-head">
+    <span class="sec-num">04 —</span>
+    <span class="sec-title">Visual Hierarchy in Action</span>
+    <span class="sec-sub">Five levels · One clear reading path</span>
+  </div>
+  <div class="hier-wrap">
+    <div class="hier-article">
+      <div class="art-eyebrow">Brand Design · Feature</div>
+      <h1 class="art-h1">The Voice<br>of a Brand</h1>
+      <h2 class="art-h2">Why the typeface you choose says more than the words you write</h2>
+      <div class="art-divider"></div>
+      <p class="art-body">Typography is the primary carrier of brand personality. Before a customer reads a single word, they feel the brand through the weight, width, and spacing of its letters. A heavy sans-serif commands; a light italic whispers; a condensed display shouts.</p>
+      <p class="art-body">Great brand typography is not about finding the "best" font. It is about finding the right voice for a specific audience, then applying it with discipline and consistency across every touchpoint.</p>
+      <div class="art-caption">Demonstration of five-level hierarchy: eyebrow → H1 → H2 → body → caption. Each level uses size, weight, style, and colour to direct the eye in sequence.</div>
+    </div>
+    <div class="hier-legend">
+      <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:1.5rem;">Reading order explained:</div>
+      <div class="hl-item">
+        <div class="hl-dot" style="background:var(--ember);"></div>
+        <div><div class="hl-role">Eyebrow</div><div class="hl-desc">Space Mono, caps, ember colour. Sets category/context before the eye reaches the headline.</div></div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-dot" style="background:var(--chalk);"></div>
+        <div><div class="hl-role">H1 — Headline</div><div class="hl-desc">Syne 800. Maximum weight. Dominates. The reader lands here first and cannot look away.</div></div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-dot" style="background:var(--sand);"></div>
+        <div><div class="hl-role">H2 — Deck / Subhead</div><div class="hl-desc">Fraunces italic 300, sand. Provides detail context. Quiet after the loud headline.</div></div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-dot" style="background:rgba(240,237,230,.4);"></div>
+        <div><div class="hl-role">Body</div><div class="hl-desc">Fraunces 300 / 1.82 leading. Optimised for sustained reading. Never competes upward.</div></div>
+      </div>
+      <div class="hl-item">
+        <div class="hl-dot" style="background:var(--mid);"></div>
+        <div><div class="hl-role">Caption</div><div class="hl-desc">Space Mono. The visual footnote. Present but subordinate. Closes the reading hierarchy.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 05 · SPACING ════ -->
+<section class="sec" id="s5">
+  <div class="sec-head">
+    <span class="sec-num">05 —</span>
+    <span class="sec-title">Spacing &amp; Rhythm</span>
+    <span class="sec-sub">Tracking · Leading · Measure · Breathing room</span>
+  </div>
+  <div class="spacing-cols">
+    <div class="sp-cell">
+      <span class="sp-tag">Tracking</span>
+      <div class="sp-demo">
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.05em;margin-bottom:.3rem;">TIGHT −.05</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:0;margin-bottom:.3rem;">NORMAL 0</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;">WIDE + .30</div>
+      </div>
+      <p class="sp-note">Tight: large display only.<br>Normal: headlines.<br>Wide: labels &amp; caps only.</p>
+    </div>
+    <div class="sp-cell">
+      <span class="sp-tag">Leading</span>
+      <div class="sp-demo">
+        <div style="font-family:'Fraunces',serif;font-size:.85rem;line-height:1.1;color:var(--ember);margin-bottom:.7rem;">Tight 1.1 — headlines, short callouts, display text only. Never body.</div>
+        <div style="font-family:'Fraunces',serif;font-size:.85rem;line-height:1.82;color:var(--sand);">Comfortable 1.82 — ideal for sustained reading. The eye flows naturally between lines without effort.</div>
+      </div>
+      <p class="sp-note">Body: 1.6–1.9×.<br>Headlines: 0.85–1.1×.</p>
+    </div>
+    <div class="sp-cell">
+      <span class="sp-tag">Measure</span>
+      <div class="sp-demo">
+        <div style="font-family:'Fraunces',serif;font-size:.82rem;line-height:1.65;color:var(--ember);max-width:18ch;border-left:1px solid var(--ember);padding-left:.6rem;margin-bottom:.8rem;">Too narrow — 18ch. Feels broken.</div>
+        <div style="font-family:'Fraunces',serif;font-size:.82rem;line-height:1.65;color:var(--sand);border-left:1px solid var(--sand);padding-left:.6rem;">Optimal — this line demonstrates the ideal 52ch reading measure for comfortable flow.</div>
+      </div>
+      <p class="sp-note">Target: 45–75 chars/line.<br>Golden zone: ~60ch.</p>
+    </div>
+    <div class="sp-cell">
+      <span class="sp-tag">White Space</span>
+      <div class="sp-demo" style="display:flex;flex-direction:column;gap:.8rem;">
+        <div style="background:rgba(240,237,230,.04);padding:.4rem .5rem;border:1px solid rgba(240,237,230,.06);">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;">Cramped</div>
+          <p style="font-family:'Space Mono',monospace;font-size:.5rem;line-height:1.3;color:var(--mid);">No breathing. Feels cheap and anxious.</p>
+        </div>
+        <div style="background:rgba(240,237,230,.04);padding:1.4rem 1rem;border:1px solid rgba(240,237,230,.06);">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:.5rem;">Open</div>
+          <p style="font-family:'Space Mono',monospace;font-size:.5rem;line-height:1.6;color:var(--mid);">Space = luxury &amp; trust.</p>
+        </div>
+      </div>
+      <p class="sp-note">Generous padding elevates<br>perceived brand quality.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 06 · PSYCHOLOGY ════ -->
+<section class="sec" id="s6">
+  <div class="sec-head">
+    <span class="sec-num">06 —</span>
+    <span class="sec-title">Psychology of Type</span>
+    <span class="sec-sub">What fonts feel before they're read</span>
+  </div>
+  <div class="psych-row">
+    <div class="psy-card">
+      <span class="psy-tag">Serif — Trust &amp; Heritage</span>
+      <div class="psy-word" style="font-family:'Fraunces',serif;font-size:2.5rem;font-weight:300;font-style:italic;color:var(--chalk);">Legacy</div>
+      <p class="psy-desc">Serifs carry history. The small strokes at letter-ends derive from ancient stone carving. They evoke permanence, authority, and earned credibility.</p>
+      <div class="psy-eg">→ Banks · Law · Universities · Luxury</div>
+    </div>
+    <div class="psy-card">
+      <span class="psy-tag">Geometric Sans — Confidence</span>
+      <div class="psy-word" style="font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;letter-spacing:-.02em;color:var(--chalk);">BOLD<br>NOW</div>
+      <p class="psy-desc">Heavy geometric sans-serifs project modernity, directness, and fearless ambition. They don't ask permission. Used by brands that want to be seen as category leaders.</p>
+      <div class="psy-eg">→ Tech · Sports · Fintech · Startups</div>
+    </div>
+    <div class="psy-card">
+      <span class="psy-tag">Monospace — Precision</span>
+      <div class="psy-word" style="font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:400;letter-spacing:.05em;color:var(--chalk);">SYS_BOOT<br>DATA_OK▮</div>
+      <p class="psy-desc">Equal-width letterforms signal objectivity, code, and technical mastery. The absence of personality is the personality — cold precision builds trust in data-driven contexts.</p>
+      <div class="psy-eg">→ Dev tools · Data · Crypto · Research</div>
+    </div>
+    <div class="psy-card">
+      <span class="psy-tag">Thin Italic — Refinement</span>
+      <div class="psy-word" style="font-family:'Fraunces',serif;font-style:italic;font-weight:100;font-size:2.5rem;letter-spacing:.05em;color:var(--chalk);">Élégance</div>
+      <p class="psy-desc">Ultra-light italics communicate luxury, effortlessness, and high craft. The thinness implies restraint; the italic implies movement and living energy. Nothing else says "premium" faster.</p>
+      <div class="psy-eg">→ Fashion · Fragrance · Fine dining · Art</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 07 · POSTERS ════ -->
+<section class="sec" id="s7">
+  <div class="sec-head">
+    <span class="sec-num">07 —</span>
+    <span class="sec-title">Impactful Text-Based Designs</span>
+    <span class="sec-sub">Type as the complete visual language</span>
+  </div>
+  <div class="poster-row">
+
+    <!-- Poster 1 — dark editorial -->
+    <div class="post p1">
+      <div class="p1-hline" style="top:30%;"></div>
+      <div class="p1-hline" style="top:65%;"></div>
+      <div class="p1-vline" style="left:30%;"></div>
+      <div class="post-kicker" style="font-family:'Space Mono',monospace;">CodeAlpha Studio · 2026</div>
+      <div class="post-main">
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3rem,6vw,5.5rem);line-height:.88;letter-spacing:-.03em;">
+          LESS<br>
+          <span style="color:var(--ember);">IS</span><br>
+          MORE.
+        </div>
+      </div>
+      <div class="post-foot">
+        <div style="font-family:'Fraunces',serif;font-size:.85rem;font-style:italic;font-weight:300;color:var(--sand);max-width:20ch;">Type as architecture — every element earns its place.</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.5rem;color:var(--mid);">01/03</div>
+      </div>
+    </div>
+
+    <!-- Poster 2 — ember -->
+    <div class="post p2">
+      <div class="post-kicker" style="font-family:'Space Mono',monospace;">Graphic Design Internship</div>
+      <div class="post-main">
+        <div style="font-family:'Fraunces',serif;font-weight:100;font-style:italic;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.05;letter-spacing:.02em;">
+          The right<br>typeface<br>
+          <strong style="font-style:normal;font-weight:700;">never lies.</strong>
+        </div>
+      </div>
+      <div class="post-foot">
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;">Riddhi</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.48rem;letter-spacing:.15em;text-transform:uppercase;opacity:.6;margin-top:2px;">CodeAlpha · Task 02</div>
+        </div>
+        <div style="font-family:'Space Mono',monospace;font-size:.5rem;opacity:.5;">02/03</div>
+      </div>
+    </div>
+
+    <!-- Poster 3 — sage dark -->
+    <div class="post p3">
+      <div class="post-kicker" style="font-family:'Space Mono',monospace;color:var(--sand);">Brand Identity · Typography</div>
+      <div class="post-main">
+        <div style="font-family:'Syne',sans-serif;font-weight:400;font-size:1rem;letter-spacing:.4em;text-transform:uppercase;color:var(--sand);margin-bottom:.5rem;">A studio for</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.5rem,5vw,4rem);line-height:.9;letter-spacing:-.02em;color:var(--chalk);">BOLD<br>IDEAS.</div>
+        <div style="width:40px;height:2px;background:var(--ember);margin-top:1rem;"></div>
+      </div>
+      <div class="post-foot">
+        <div style="font-family:'Fraunces',serif;font-size:.85rem;font-style:italic;color:var(--sand);">Making marks that last.</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.5rem;color:var(--mid);">03/03</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ OUTCOMES ════ -->
+<section class="sec" id="s8">
+  <div class="sec-head">
+    <span class="sec-num">08 —</span>
+    <span class="sec-title">Task 02 · Skills Demonstrated</span>
+    <span class="sec-sub">CodeAlpha Internship Objectives</span>
+  </div>
+  <div class="outcomes-grid">
+    <div class="oc-cell">
+      <div class="oc-num">01</div>
+      <div class="oc-title">Font Pairing</div>
+      <p class="oc-desc">Demonstrated three distinct pairing strategies — sans+serif, display+mono, and weight contrast — all applied in real brand contexts.</p>
+    </div>
+    <div class="oc-cell">
+      <div class="oc-num">02</div>
+      <div class="oc-title">Hierarchy</div>
+      <p class="oc-desc">Built a five-level reading system (eyebrow → H1 → deck → body → caption) that guides the eye naturally through content.</p>
+    </div>
+    <div class="oc-cell">
+      <div class="oc-num">03</div>
+      <div class="oc-title">Spacing</div>
+      <p class="oc-desc">Applied tracking, leading, measure, and white space principles to control rhythm, readability, and perceived brand quality.</p>
+    </div>
+    <div class="oc-cell">
+      <div class="oc-num">04</div>
+      <div class="oc-title">Impactful Design</div>
+      <p class="oc-desc">Created three distinct text-based poster designs using type as the sole visual element — each communicating a different brand voice.</p>
+    </div>
+    <div class="oc-cell">
+      <div class="oc-num">05</div>
+      <div class="oc-title">Type Psychology</div>
+      <p class="oc-desc">Explored how serif, geometric sans, monospace, and thin italic typefaces each create distinct emotional responses and brand associations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<div class="tools-bar">
+  <span class="tl-label">Tools →</span>
+  <span class="tl-tag">Illustrator</span>
+  <span class="tl-tag">Photoshop</span>
+  <span class="tl-tag">Canva</span>
+  <span class="tl-tag">Figma</span>
+  <span class="tl-tag">InDesign</span>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="ft-left">
+    <div class="ft-name">Riddhi</div>
+    <div class="ft-role">Graphic Design Intern · Task 02 · Brand Identity Typography</div>
+  </div>
+  <div class="ft-org">CodeAlpha</div>
+  <div class="ft-task">
+    <div>Internship Program · 2026</div>
+    <div>Typography Practice Series</div>
+  </div>
+</footer>
+
+<script>
+  // cursor
+  const cur = document.getElementById('cur');
+  const curo = document.getElementById('curo');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    cur.style.left=mx+'px';cur.style.top=my+'px';
+  });
+  (function loop(){
+    rx+=(mx-rx)*.13;ry+=(my-ry)*.13;
+    curo.style.left=rx+'px';curo.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('.brand-card,.pd-card,.psy-card,.oc-cell,.tl-tag,.chip').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';curo.style.width='50px';curo.style.height='50px';});
+    el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';curo.style.width='32px';curo.style.height='32px';});
+  });
+
+  // progress
+  const prog=document.getElementById('prog');
+  window.addEventListener('scroll',()=>{
+    prog.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+  });
+
+  // scroll reveal
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+  },{threshold:.07});
+  document.querySelectorAll('.sec').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
+HTMLEOF
+echo "Done"
+Output
+
+Done
